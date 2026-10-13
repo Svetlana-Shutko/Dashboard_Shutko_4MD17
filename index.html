@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Сводка дня</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>Сводка дня</h1>
+      <p class="updated" id="updated">Загружаем данные…</p>
+    </div>
+
+    <form class="city-form" id="cityForm" autocomplete="off">
+      <label for="cityInput" class="visually-hidden">Город</label>
+      <input id="cityInput" type="text" placeholder="Город, например Казань" required>
+      <button type="submit">Показать</button>
+    </form>
+
+    <button class="refresh" id="refreshBtn" type="button" aria-label="Обновить все данные">
+      Обновить
+    </button>
+  </header>
+
+  <main>
+    <!-- Погода: Open-Meteo -->
+    <section class="weather" id="weather" aria-live="polite">
+      <div class="weather-now">
+        <p class="place" id="place">—</p>
+        <p class="temp" id="temp">--°</p>
+        <p class="condition" id="condition"></p>
+        <dl class="facts" id="facts"></dl>
+      </div>
+      <figure class="curve">
+        <svg id="curve" viewBox="0 0 600 200" preserveAspectRatio="none" role="img" aria-label="Температура на ближайшие 24 часа"></svg>
+        <figcaption>Ближайшие 24 часа</figcaption>
+      </figure>
+      <ol class="days" id="days"></ol>
+    </section>
+
+    <div class="grid">
+      <!-- Курсы валют: Frankfurter (ЕЦБ) -->
+      <section class="panel" id="fxPanel">
+        <div class="panel-head">
+          <h2>Курсы к евро</h2>
+          <span class="source">ЕЦБ, 30 дней</span>
+        </div>
+        <table class="fx">
+          <thead>
+            <tr><th scope="col">Валюта</th><th scope="col">Курс</th><th scope="col">За месяц</th><th scope="col"><span class="visually-hidden">График</span></th></tr>
+          </thead>
+          <tbody id="fxBody"></tbody>
+        </table>
+      </section>
+
+      <!-- Криптовалюты: CoinGecko -->
+      <section class="panel" id="cryptoPanel">
+        <div class="panel-head">
+          <h2>Криптовалюты</h2>
+          <span class="source">CoinGecko, USD</span>
+        </div>
+        <ul class="crypto" id="cryptoList"></ul>
+      </section>
+
+      <!-- Новости: Hacker News -->
+      <section class="panel news-panel" id="newsPanel">
+        <div class="panel-head">
+          <h2>Обсуждают на Hacker News</h2>
+          <span class="source">топ сейчас</span>
+        </div>
+        <ol class="news" id="newsList"></ol>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    Данные: Open-Meteo, Frankfurter, CoinGecko, Hacker News API. Автообновление каждые 5 минут.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
